@@ -1,0 +1,29 @@
+---
+name: Check config
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: frenck/action-yamllint@34b4bbcaeabedcfefad6adea8c5bbc42af0e2d47 # v1.5.0
+
+  config-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Create dummy secrets.yaml
+        run: cp secrets.yaml.example secrets.yaml
+
+      - uses: frenck/action-home-assistant@941d5d917f4c1c7a7e7d4087526daf90d53f4437 # v1.4.1
+        with:
+          path: "."
+          secrets: secrets.yaml
+          version: "stable"

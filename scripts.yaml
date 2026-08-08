@@ -1,14 +1,14 @@
 unlock:
   sequence:
-  - action: button.press
-    metadata: {}
-    target:
-      entity_id: button.otorotuku_otorotukujie_ding
-    data: {}
-  - action: lock.unlock
-    metadata: {}
-    target:
-      entity_id: lock.sesami5
-    data: {}
+    - action: button.press
+      metadata: {}
+      target:
+        entity_id: button.otorotuku_otorotukujie_ding
+      data: {}
+    - action: lock.unlock
+      metadata: {}
+      target:
+        entity_id: lock.sesami5
+      data: {}
   alias: '帰宅: unlock'
   description: ''
