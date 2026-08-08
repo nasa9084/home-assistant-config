@@ -1,0 +1,41 @@
+esphome:
+  name: bluetoothproxy-m5nanoc6-1312
+  friendly_name: BluetoothProxy-M5nanoC6-1312
+
+esp32:
+  board: esp32-c6-devkitc-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_key_1312
+
+ota:
+  - platform: esphome
+    password: !secret ota_password_1312
+
+wifi:
+  networks:
+    - ssid: !secret wifi_ssid
+      password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Bluetoothproxy-M5Nanoc6-1312"
+    password: !secret ap_password_1312
+
+captive_portal:
+
+esp32_ble_tracker:
+  scan_parameters:
+    interval: 1100ms
+    window: 1100ms
+    active: true
+
+bluetooth_proxy:
+    active: true

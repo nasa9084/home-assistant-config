@@ -16,7 +16,7 @@
 
 # 再許可したディレクトリ内での除外
 **/secrets.yaml
-esphome/.esphome/
+esphome/.*
 esphome/build/
 blueprints/*/homeassistant/
 **/.DS_Store
