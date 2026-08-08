@@ -19,11 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - name: Create dummy secrets.yaml
-        run: cp secrets.yaml.example secrets.yaml
-
       - uses: frenck/action-home-assistant@941d5d917f4c1c7a7e7d4087526daf90d53f4437 # v1.4.1
         with:
           path: "."
-          secrets: secrets.yaml
+          secrets: secrets.yaml.example
           version: "stable"
