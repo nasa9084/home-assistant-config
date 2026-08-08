@@ -1,0 +1,32 @@
+# ルート直下をすべて無視
+/*
+
+# 追跡するものだけ再許可
+!.gitignore
+!README.md
+!.github/
+!configuration.yaml
+!automations.yaml
+!scripts.yaml
+!scenes.yaml
+!secrets.yaml.example
+!packages/
+!blueprints/
+!esphome/
+
+# 再許可したディレクトリ内での除外
+**/secrets.yaml
+esphome/.esphome/
+esphome/build/
+blueprints/*/homeassistant/
+**/.DS_Store
+**/._*
+
+# 保険
+.storage/
+.cloud/
+*.json
+*.db
+*.db-*
+*.log
+*.log.*
