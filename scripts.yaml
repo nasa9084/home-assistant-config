@@ -6,15 +6,15 @@ unlock:
           entity_id: switch.otorotuku
           state: 'on'
       then:
-        action: switch.turn_off
-        target:
-          entity_id: switch.otorotuku
-        data: {}
+        - action: switch.turn_off
+          target:
+            entity_id: switch.otorotuku
+          data: {}
       else:
-        action: switch.turn_on
-        target:
-          entity_id: switch.otorotuku
-        data: {}
+        - action: switch.turn_on
+          target:
+            entity_id: switch.otorotuku
+          data: {}
     - action: lock.unlock
       metadata: {}
       target:
