@@ -4,7 +4,7 @@ unlock:
     - if:
         - condition: state
           entity_id: switch.otorotuku
-          state: on
+          state: 'on'
       then:
         action: switch.turn_off
         target:
