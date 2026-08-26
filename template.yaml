@@ -33,3 +33,36 @@
           {% endif %}
         {% endfor %}
         {{ ns.f }}
+    - name: "JMA 東京"
+      unique_id: jma_weather_tokyo
+      temperature_unit: "°C"
+      attribution_template: >-
+        {% set ts = state_attr('sensor.jma_tokyo_short','timeSeries') %}
+        {% set a = ts[0].areas | selectattr('area.name','eq','東京地方') | first %}
+        {{ a.weathers[0] }}
+      condition_template: >-
+        {% set ts = state_attr('sensor.jma_tokyo_short','timeSeries') %}
+        {% set a = ts[0].areas | selectattr('area.name','eq','東京地方') | first %}
+        {{ {'1':'sunny','2':'cloudy','3':'rainy','4':'snowy'}.get(a.weatherCodes[0][0],'cloudy') }}
+      temperature_template: >-
+        {% set ts = state_attr('sensor.jma_tokyo_short','timeSeries') %}
+        {% set t = ts[2].areas | selectattr('area.name','eq','東京') | first %}
+        {{ t.temps | last | int }}
+      humidity_template: "{{ none }}"
+      forecast_daily_template: >-
+        {% set w = state_attr('sensor.jma_tokyo_week','timeSeries') %}
+        {% set a = w[0].areas[0] %}
+        {% set t = w[1].areas | selectattr('area.name','eq','東京') | first %}
+        {% set ns = namespace(f=[]) %}
+        {% for i in range(w[0].timeDefines | length) %}
+          {% if t.tempsMax[i] != '' %}
+            {% set ns.f = ns.f + [{
+              'datetime': w[0].timeDefines[i],
+              'condition': {'1':'sunny','2':'cloudy','3':'rainy','4':'snowy'}.get(a.weatherCodes[i][0],'cloudy'),
+              'temperature': t.tempsMax[i] | int,
+              'templow': t.tempsMin[i] | int,
+              'precipitation_probability': a.pops[i] | int(0)
+            }] %}
+          {% endif %}
+        {% endfor %}
+        {{ ns.f }}
