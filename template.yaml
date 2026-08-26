@@ -11,6 +11,7 @@
         {% set ts = state_attr('sensor.jma_sapporo_short','timeSeries') %}
         {% set t = ts[2].areas | selectattr('area.name','eq','札幌') | first %}
         {{ t.temps | last | int }}
+      humidity_template: "{{ none }}"
       forecast_daily_template: >-
         {% set w = state_attr('sensor.jma_sapporo_week','timeSeries') %}
         {% set a = w[0].areas[0] %}
