@@ -12,3 +12,5 @@ scene: !include scenes.yaml
 
 # REST-based resources
 rest: !include rest.yaml
+
+template: !include template.yaml

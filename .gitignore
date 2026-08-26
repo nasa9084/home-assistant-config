@@ -12,6 +12,7 @@
 !scripts.yaml
 !scenes.yaml
 !secrets.yaml.example
+!template.yaml
 !packages/
 !blueprints/
 !esphome/
