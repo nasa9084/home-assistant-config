@@ -1,8 +1,7 @@
 ---
-recorder:
-  exclude:
-    entities:
-      - sensor.jma_sapporo_short
-      - sensor.jma_sapporo_week
-      - sensor.jma_tokyo_short
-      - sensor.jma_tokyo_week
+exclude:
+  entities:
+    - sensor.jma_sapporo_short
+    - sensor.jma_sapporo_week
+    - sensor.jma_tokyo_short
+    - sensor.jma_tokyo_week
