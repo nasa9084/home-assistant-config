@@ -8,7 +8,7 @@
 !.yamllint
 !configuration.yaml
 !automations.yaml
-!influxdb.yaml
+!rest.yaml
 !scripts.yaml
 !scenes.yaml
 !secrets.yaml.example

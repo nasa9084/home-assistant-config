@@ -1,0 +1,34 @@
+---
+- resource: https://www.jma.go.jp/bosai/forecast/data/forecast/016000.json
+  scan_interval: 900
+  timeout: 20
+  sensor:
+    - name: "JMA Sapporo Short"
+      unique_id: jma_sapporo_short
+      device_class: timestamp
+      value_template: "{{ value_json[0].reportDatetime }}"
+      json_attributes_path: "$.[0]"
+      json_attributes: [timeSeries]
+    - name: "JMA Sapporo Week"
+      unique_id: jma_sapporo_week
+      device_class: timestamp
+      value_template: "{{ value_json[1].reportDatetime }}"
+      json_attributes_path: "$.[1]"
+      json_attributes: [timeSeries]
+
+- resource: https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json
+  scan_interval: 900
+  timeout: 20
+  sensor:
+    - name: "JMA Tokyo Short"
+      unique_id: jma_tokyo_short
+      device_class: timestamp
+      value_template: "{{ value_json[0].reportDatetime }}"
+      json_attributes_path: "$.[0]"
+      json_attributes: [timeSeries]
+    - name: "JMA Tokyo Week"
+      unique_id: jma_tokyo_week
+      device_class: timestamp
+      value_template: "{{ value_json[1].reportDatetime }}"
+      json_attributes_path: "$.[1]"
+      json_attributes: [timeSeries]
