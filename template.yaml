@@ -3,6 +3,10 @@
     - name: "JMA 札幌"
       unique_id: jma_weather_sapporo
       temperature_unit: "°C"
+      attribution_template: >-
+        {% set ts = state_attr('sensor.jma_sapporo_short','timeSeries') %}
+        {% set a = ts[0].areas | selectattr('area.name','eq','石狩地方') | first %}
+        {{ a.weathers[0] }}
       condition_template: >-
         {% set ts = state_attr('sensor.jma_sapporo_short','timeSeries') %}
         {% set a = ts[0].areas | selectattr('area.name','eq','石狩地方') | first %}
