@@ -8,6 +8,7 @@
 !.yamllint
 !configuration.yaml
 !automations.yaml
+!recorder.yaml
 !rest.yaml
 !scripts.yaml
 !scenes.yaml
