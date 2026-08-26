@@ -10,7 +10,21 @@
       condition_template: >-
         {% set ts = state_attr('sensor.jma_sapporo_short','timeSeries') %}
         {% set a = ts[0].areas | selectattr('area.name','eq','石狩地方') | first %}
-        {{ {'1':'sunny','2':'cloudy','3':'rainy','4':'snowy'}.get(a.weatherCodes[0][0],'cloudy') }}
+        {% set c = a.weatherCodes[0] %}
+        {% set w = a.weathers[0] | replace('　','') %}
+        {% if '雷' in w %} lightning-rainy
+        {% elif '激しく' in w %} pouring
+        {% elif c[0] == '4' %} snowy
+        {% elif c[0] == '3' %} rainy
+        {% elif '雪' in w %} snowy-rainy
+        {% elif '雨' in w %} rainy
+        {% elif '霧' in w %} fog
+        {% elif c in ['201','210','211'] %} partlycloudy
+        {% elif c[0] == '2' %} cloudy
+        {% elif c in ['101','110','111','112','115'] %} partlycloudy
+        {% elif c[0] == '1' %} sunny
+        {% else %} exceptional
+        {% endif %}
       temperature_template: >-
         {% set ts = state_attr('sensor.jma_sapporo_short','timeSeries') %}
         {% set t = ts[2].areas | selectattr('area.name','eq','札幌') | first %}
@@ -43,7 +57,21 @@
       condition_template: >-
         {% set ts = state_attr('sensor.jma_tokyo_short','timeSeries') %}
         {% set a = ts[0].areas | selectattr('area.name','eq','東京地方') | first %}
-        {{ {'1':'sunny','2':'cloudy','3':'rainy','4':'snowy'}.get(a.weatherCodes[0][0],'cloudy') }}
+        {% set c = a.weatherCodes[0] %}
+        {% set w = a.weathers[0] | replace('　','') %}
+        {% if '雷' in w %} lightning-rainy
+        {% elif '激しく' in w %} pouring
+        {% elif c[0] == '4' %} snowy
+        {% elif c[0] == '3' %} rainy
+        {% elif '雪' in w %} snowy-rainy
+        {% elif '雨' in w %} rainy
+        {% elif '霧' in w %} fog
+        {% elif c in ['201','210','211'] %} partlycloudy
+        {% elif c[0] == '2' %} cloudy
+        {% elif c in ['101','110','111','112','115'] %} partlycloudy
+        {% elif c[0] == '1' %} sunny
+        {% else %} exceptional
+        {% endif %}
       temperature_template: >-
         {% set ts = state_attr('sensor.jma_tokyo_short','timeSeries') %}
         {% set t = ts[2].areas | selectattr('area.name','eq','東京') | first %}
