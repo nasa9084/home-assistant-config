@@ -16,3 +16,5 @@ rest: !include rest.yaml
 template: !include template.yaml
 
 recorder: !include recorder.yaml
+
+prometheus:
