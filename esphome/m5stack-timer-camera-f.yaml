@@ -52,6 +52,13 @@ esp32_camera:
   idle_framerate: 0.0167 fps
   horizontal_mirror: false
 
+switch:
+  - platform: gpio
+    id: bat_hold_pin
+    name: Battery Hold Pin
+    pin: GPIO33
+    restore_mode: RESTORE_DEFAULT_ON
+
 sensor:
   - platform: wifi_signal
     name: WiFi Signal
