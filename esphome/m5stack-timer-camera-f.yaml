@@ -1,4 +1,9 @@
 ---
+i2c:
+  - id: bsp_i2c
+    sda: GPIO12
+    scl: GPIO14
+
 time:
   - platform: bm8563
     id: rtc_time
