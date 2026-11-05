@@ -1,7 +1,25 @@
 ---
+time:
+  - platform: bm8563
+    id: rtc_time
+    i2c_id: bsp_i2c
+    update_interval: never
+
+script:
+  - id: sleep_test
+    then:
+      - delay: 90s                # 1枚HAに届くまで待つ
+      - bm8563.start_timer:
+          duration: 2min
+      - switch.turn_off: bat_hold_pin
+
 esphome:
   name: m5stack-timer-camera-f
   friendly_name: M5Stack Timer Camera F
+  on_boot:
+    priority: -100
+    then:
+      - script.execute: sleep_test
 
 esp32:
   variant: esp32
