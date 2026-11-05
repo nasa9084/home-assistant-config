@@ -1,9 +1,4 @@
 ---
-i2c:
-  - id: bsp_i2c
-    sda: GPIO12
-    scl: GPIO14
-
 time:
   - platform: bm8563
     id: rtc_time
@@ -57,6 +52,9 @@ i2c:
   - id: cam_i2c
     sda: GPIO25
     scl: GPIO23
+  - id: bsp_i2c
+    sda: GPIO12
+    scl: GPIO14
 
 esp32_camera:
   name: Camera
