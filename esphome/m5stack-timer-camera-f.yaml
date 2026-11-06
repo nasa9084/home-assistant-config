@@ -1,25 +1,31 @@
 ---
 time:
-  - platform: bm8563
-    id: rtc_time
-    i2c_id: bsp_i2c
-    update_interval: never
+  - platform: homeassistant
+    id: ha_time
+    on_time_sync:
+      then:
+        - script.execute: night_nap
+
+deep_sleep:
+  id: deep_sleep_1
 
 script:
-  - id: sleep_test
+  - id: night_nap
+    mode: single
     then:
-      - delay: 90s                # 1枚HAに届くまで待つ
-      - bm8563.start_timer:
-          duration: 2min
-      - switch.turn_off: bat_hold_pin
+      - if:
+          condition:
+            lambda: |-
+              auto t = id(ha_time).now();
+              return t.is_valid() && (t.hour >= 21 || t.hour < 8);
+          then:
+            - delay: 30s
+            - deep_sleep.enter:
+                sleep_duration: 10min
 
 esphome:
   name: m5stack-timer-camera-f
   friendly_name: M5Stack Timer Camera F
-  on_boot:
-    priority: -100
-    then:
-      - script.execute: sleep_test
 
 esp32:
   variant: esp32
@@ -40,6 +46,9 @@ api:
 ota:
   - platform: esphome
     encryption:
+    on_begin:
+      then:
+        - deep_sleep.prevent: deep_sleep_1
 
 wifi:
   ssid: !secret wifi_ssid
@@ -52,9 +61,6 @@ i2c:
   - id: cam_i2c
     sda: GPIO25
     scl: GPIO23
-  - id: bsp_i2c
-    sda: GPIO12
-    scl: GPIO14
 
 esp32_camera:
   name: Camera
@@ -70,7 +76,7 @@ esp32_camera:
   resolution: 1600x1200
   jpeg_quality: 10
   max_framerate: 1 fps
-  idle_framerate: 0.0167 fps
+  idle_framerate: 0.1 fps
   horizontal_mirror: false
 
 switch:
