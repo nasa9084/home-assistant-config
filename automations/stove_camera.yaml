@@ -1,3 +1,4 @@
+---
 # The stove camera sleeps from 21:00 to 08:00 and wakes every 10 minutes for a few
 # seconds. Its camera entity is unavailable while it sleeps, so keep the latest
 # frame in a file (shown by the local_file camera in configuration.yaml).

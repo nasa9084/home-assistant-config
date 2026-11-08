@@ -20,11 +20,3 @@ template: !include template.yaml
 recorder: !include recorder.yaml
 
 prometheus:
-
-# Latest frame of the stove camera, which is unavailable while it sleeps at night
-# (see automations/stove_camera.yaml). The file must exist when this is loaded: take one
-# snapshot first, then reload or restart.
-camera:
-  - platform: local_file
-    name: Stove camera (latest)
-    file_path: /media/stove_latest.jpg
