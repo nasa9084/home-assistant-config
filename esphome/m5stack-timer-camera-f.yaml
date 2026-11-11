@@ -92,5 +92,14 @@ sensor:
     update_interval: 60s
   - platform: uptime
     name: Uptime
+  # Battery voltage (about 3.3 V empty to 4.2 V full). The node is awake for only about 30 seconds
+  # at night, so sample often enough to be reported before it goes back to sleep.
+  - platform: adc
+    pin: GPIO38
+    name: Battery Voltage
+    attenuation: 12db
+    filters:
+      - multiply: 1.51
+    update_interval: 10s
 
 captive_portal:
