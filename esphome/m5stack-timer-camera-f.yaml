@@ -84,7 +84,8 @@ switch:
     id: bat_hold_pin
     name: Battery Hold Pin
     pin: GPIO33
-    restore_mode: RESTORE_DEFAULT_ON
+    # Keep the battery connected: with this off, the camera dies as soon as USB power is cut.
+    restore_mode: ALWAYS_ON
 
 sensor:
   - platform: wifi_signal
