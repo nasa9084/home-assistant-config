@@ -20,12 +20,21 @@ script:
               return t.is_valid() && (t.hour >= 21 || t.hour < 8);
           then:
             - delay: 30s
+            # GPIO outputs are released in deep sleep. Without the battery hold pin the camera
+            # loses power while asleep, so the timer can never wake it up.
+            - lambda: gpio_hold_en(GPIO_NUM_33);
             - deep_sleep.enter:
                 sleep_duration: 10min
 
 esphome:
   name: m5stack-timer-camera-f
   friendly_name: M5Stack Timer Camera F
+  on_boot:
+    # Release the battery hold pin held during deep sleep (see night_nap). This runs after the
+    # switch has set the pin high, so the power stays on.
+    priority: 600
+    then:
+      - lambda: gpio_hold_dis(GPIO_NUM_33);
 
 esp32:
   variant: esp32
